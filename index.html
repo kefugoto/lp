@@ -41,12 +41,12 @@ body { font-family: 'Noto Sans JP', sans-serif; color: var(--dark); background: 
   pointer-events: none;
 }
 .hero-logo {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(64px, 18vw, 128px);
-  color: var(--white);
-  letter-spacing: 0.04em;
-  line-height: 1;
   animation: up 0.7s ease both;
+}
+.hero-logo img {
+  height: clamp(64px, 18vw, 128px);
+  width: auto;
+  filter: brightness(0) invert(1);
 }
 .hero-tagline {
   font-size: clamp(15px, 4vw, 20px);
@@ -227,7 +227,7 @@ footer a:hover { color: white; }
 <body>
 
 <section class="hero">
-  <div class="hero-logo">KEFUGOTO</div>
+  <div class="hero-logo"><img src="assets/logo.png" alt="KEFUGOTO"></div>
   <div class="hero-tagline">毎日をラクにするAIアシスタント</div>
   <div class="hero-questions">
     <span>今日何食べる？</span>
