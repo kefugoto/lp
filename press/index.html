@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KEFUGOTO プレスキット</title>
+<meta name="description" content="iOSアプリ KEFUGOTO（けふごと）のプレスキット。アプリ概要・基本情報・アイコン・スクリーンショット・ロゴ素材を掲載しています。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --orange: #F47E38;
+  --dark: #1A1A1A;
+  --gray: #888888;
+  --bg: #F5F5F5;
+  --white: #fff;
+  --border: #EEEEEE;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Noto Sans JP', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+
+header.page-head {
+  padding: 56px 20px 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.page-head img { height: 40px; width: auto; }
+.page-head h1 { font-size: clamp(20px, 5.5vw, 28px); font-weight: 700; margin-top: 16px; }
+.page-head p { font-size: 13px; color: var(--gray); margin-top: 8px; line-height: 1.8; }
+
+section { padding: 56px 20px; }
+section + section { border-top: 1px solid var(--border); }
+.container { max-width: 680px; margin: 0 auto; }
+.label {
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 10px;
+}
+h2 { font-size: clamp(18px, 5vw, 24px); font-weight: 700; line-height: 1.4; margin-bottom: 16px; }
+.desc { font-size: 14px; color: var(--gray); line-height: 1.9; }
+
+/* 確定コピー */
+.tagline { background: var(--orange); text-align: center; padding: 72px 20px; }
+.tagline .copy {
+  color: var(--white);
+  font-size: clamp(22px, 6.5vw, 38px);
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+}
+.tagline .note { color: rgba(255,255,255,0.75); font-size: 12px; margin-top: 14px; }
+
+/* 概要 */
+.summary-block {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 16px;
+}
+.summary-block h3 { font-size: 13px; font-weight: 700; color: var(--orange); margin-bottom: 10px; }
+.summary-block p { font-size: 14px; line-height: 2; }
+
+/* 基本情報表 */
+table.facts { width: 100%; border-collapse: collapse; margin-top: 8px; }
+table.facts th, table.facts td {
+  border-bottom: 1px solid var(--border);
+  padding: 14px 8px;
+  font-size: 13px;
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.7;
+}
+table.facts th { width: 35%; font-weight: 700; color: var(--gray); white-space: nowrap; }
+
+/* アイコン */
+.icon-row { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-top: 8px; }
+.icon-row img {
+  width: 120px; height: 120px;
+  border: 1px solid var(--border);
+  border-radius: 26px;
+}
+.dl-link {
+  display: inline-block;
+  font-size: 13px; font-weight: 700;
+  color: var(--orange);
+  text-decoration: none;
+  border: 1px solid var(--orange);
+  border-radius: 50px;
+  padding: 10px 22px;
+  margin-top: 12px;
+}
+.dl-link:hover { background: var(--orange); color: var(--white); }
+
+/* スクショ */
+.shots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.shots figure { margin: 0; }
+.shots img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.shots figcaption { font-size: 11px; color: var(--gray); margin-top: 6px; text-align: center; }
+.shots figcaption a { color: var(--orange); text-decoration: none; }
+.shots figcaption a:hover { text-decoration: underline; }
+
+/* ロゴ */
+.logo-box {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px 20px;
+  text-align: center;
+  margin-top: 16px;
+}
+.logo-box img { max-width: 280px; width: 80%; height: auto; }
+.brand-rules { list-style: none; margin-top: 20px; }
+.brand-rules li {
+  font-size: 13px; line-height: 1.8;
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+}
+.brand-rules li::before { content: '—'; color: var(--orange); font-weight: 700; }
+.swatch {
+  display: inline-block;
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  background: var(--orange);
+  vertical-align: -3px;
+  margin-right: 6px;
+}
+
+/* 連絡先 */
+.contact-box { background: var(--bg); border-radius: 10px; padding: 24px 20px; margin-top: 16px; text-align: center; }
+.contact-box a { color: var(--orange); font-weight: 700; font-size: 16px; text-decoration: none; }
+.contact-box p { font-size: 12px; color: var(--gray); margin-top: 8px; }
+
+footer {
+  background: var(--dark);
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  padding: 36px 20px;
+  font-size: 12px; line-height: 2.2;
+}
+footer a { color: rgba(255,255,255,0.45); text-decoration: none; margin: 0 10px; }
+footer a:hover { color: white; }
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <img src="../assets/logo.png" alt="KEFUGOTO">
+  <h1>KEFUGOTO プレスキット</h1>
+  <p>iOSアプリ「KEFUGOTO（けふごと）」の取材・紹介記事用素材ページです。<br>掲載の画像・テキストは報道・紹介目的で自由にご利用いただけます。</p>
+</header>
+
+<div class="tagline">
+  <div class="copy">朝、KEFUGOTOを開けば、<br>今日が決まる。</div>
+  <div class="note">確定コピー（表記はこのまま使用してください）</div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="label">About</div>
+    <h2>アプリ概要</h2>
+    <div class="summary-block">
+      <h3>100字版</h3>
+      <p>朝、KEFUGOTOを開けば、今日が決まる。服・食事・持ち物・予定——今日必要なことだけをAIが先回りして決めてくれる、決断疲れを肩代わりするiOSアプリ。</p>
+    </div>
+    <div class="summary-block">
+      <h3>400字版</h3>
+      <p>「朝、KEFUGOTOを開けば、今日が決まる」。KEFUGOTOは、「今日何着る？」「何食べる？」「ゴミの日だっけ？」といった朝の小さな迷いを、AIが先回りして決めてくれるiOSアプリです。天気・予定・ユーザーの好みをもとに、今日の服装、ごはん、持ち物とゴミ出し、出発のタイミング、やるべきこと、体調と運動のヒントまで、今日必要なことだけをまとめて毎朝届けます。迷う時間も、考える手間もいらない。開くだけ。天気と今日の予定、ゴミの日カレンダー、AIからの今日のひとことは無料で利用でき、すべての提案をフル活用できる「KEFUGOTO Premium」は月額¥980、年額¥7,800（7日間の無料トライアル付き）。プライバシーにも配慮し、氏名やメールアドレスはAIに送信せず、位置情報は「おおよその地域」レベルでのみ使用します。決断疲れを肩代わりする、毎日のためのAIアシスタントです。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="label">Facts</div>
+    <h2>基本情報</h2>
+    <table class="facts">
+      <tr><th>アプリ名</th><td>KEFUGOTO（けふごと）</td></tr>
+      <tr><th>カテゴリ</th><td>ライフスタイル</td></tr>
+      <tr><th>価格</th><td>無料（プレミアム 月¥980・年¥7,800）</td></tr>
+      <tr><th>対応</th><td>iOS</td></tr>
+      <tr><th>配信</th><td>日本</td></tr>
+      <tr><th>開発</th><td>makoto takasugi（個人開発）</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="label">Icon</div>
+    <h2>アプリアイコン</h2>
+    <div class="icon-row">
+      <img src="assets/icon.png" alt="KEFUGOTOアプリアイコン">
+      <div>
+        <p class="desc">1024×1024 PNG</p>
+        <a class="dl-link" href="assets/icon.png" download>icon.png をダウンロード</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="label">Screenshots</div>
+    <h2>スクリーンショット</h2>
+    <p class="desc">App Store用スクリーンショット（1284×2778 PNG）。クリックで原寸表示。</p>
+    <div class="shots">
+      <figure>
+        <a href="assets/screenshot-01.png"><img src="assets/screenshot-01.png" alt="KEFUGOTOスクリーンショット1"></a>
+        <figcaption><a href="assets/screenshot-01.png" download>screenshot-01.png</a></figcaption>
+      </figure>
+      <figure>
+        <a href="assets/screenshot-02.png"><img src="assets/screenshot-02.png" alt="KEFUGOTOスクリーンショット2"></a>
+        <figcaption><a href="assets/screenshot-02.png" download>screenshot-02.png</a></figcaption>
+      </figure>
+      <figure>
+        <a href="assets/screenshot-03.png"><img src="assets/screenshot-03.png" alt="KEFUGOTOスクリーンショット3"></a>
+        <figcaption><a href="assets/screenshot-03.png" download>screenshot-03.png</a></figcaption>
+      </figure>
+      <figure>
+        <a href="assets/screenshot-04.png"><img src="assets/screenshot-04.png" alt="KEFUGOTOスクリーンショット4"></a>
+        <figcaption><a href="assets/screenshot-04.png" download>screenshot-04.png</a></figcaption>
+      </figure>
+      <figure>
+        <a href="assets/screenshot-05.png"><img src="assets/screenshot-05.png" alt="KEFUGOTOスクリーンショット5"></a>
+        <figcaption><a href="assets/screenshot-05.png" download>screenshot-05.png</a></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="label">Logo</div>
+    <h2>ロゴ</h2>
+    <div class="logo-box">
+      <img src="../assets/logo.png" alt="KEFUGOTOロゴ">
+    </div>
+    <a class="dl-link" href="../assets/logo.png" download>logo.png をダウンロード</a>
+    <ul class="brand-rules">
+      <li>ブランドカラー：<span class="swatch"></span>#F47E38</li>
+      <li>ロゴの改変（変形・色変更・要素の追加削除）はできません</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="label">Developer</div>
+    <h2>開発者プロフィール</h2>
+    <p class="desc">makoto takasugi<br>個人開発者。「決断疲れを肩代わりする」をテーマにKEFUGOTOを開発・運営。</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="label">Contact</div>
+    <h2>連絡先</h2>
+    <div class="contact-box">
+      <a href="mailto:kefugoto@gmail.com">kefugoto@gmail.com</a>
+      <p>取材・掲載に関するお問い合わせはこちらまで。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <a href="https://kefugoto.github.io/lp/">公式サイト</a>
+    <a href="https://kefugoto.github.io/lp/terms.html">利用規約</a>
+    <a href="https://kefugoto.github.io/lp/privacy.html">プライバシーポリシー</a>
+  </div>
+  <div style="margin-top:8px">© 2026 KEFUGOTO. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
