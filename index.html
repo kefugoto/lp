@@ -3,417 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KEFUGOTO — 毎日をラクにするAIアシスタント</title>
-<meta name="description" content="今日何食べる？今日何着る？今月使いすぎ？AIが毎朝パーソナライズされた提案を届けるiOSアプリ。">
+<title>KEFUGOTO — 毎朝、今日が決まる。決断を肩代わりするAI</title>
+<meta name="description" content="服・ごはん・持ち物・出発時刻まで、毎日の小さな決断をAIが肩代わり。天気・カレンダー・ゴミの日は無料。iOSアプリ。">
+<meta property="og:title" content="KEFUGOTO — 毎朝、今日が決まる。">
+<meta property="og:description" content="決断を肩代わりするAIアシスタント。服・ごはん・予定・お金まで、毎朝あなたの代わりに決める。">
+<meta property="og:image" content="https://kefugoto.github.io/lp/assets/logo.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --orange: #F47E38;
-  --yellow: #FAC132;
-  --green: #9CBF3D;
-  --blue: #40A1CC;
-  --pink: #E26A74;
-  --dark: #1A1A1A;
-  --gray: #888888;
-  --bg: #F5F5F5;
-  --white: #fff;
-  --border: #EEEEEE;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --orange:#F47E38; --green:#9CBF3D; --yellow:#FAC132; --blue:#40A1CC; --pink:#E26A74;
+  --ink:#1A1A1A; --sub:#888888; --hint:#BBBBBB;
+  --line:#EEEEEE; --bg:#FAFAFA; --white:#fff;
 }
-html { scroll-behavior: smooth; }
-body { font-family: 'Noto Sans JP', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--ink);background:var(--white);line-height:1.7;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.22em;color:var(--orange);text-transform:uppercase;margin-bottom:12px}
+h2{font-size:clamp(24px,6vw,32px);font-weight:700;line-height:1.45;letter-spacing:-.01em}
+.lead{font-size:15px;color:var(--sub);margin-top:14px;line-height:1.9}
 
-/* HERO */
-.hero {
-  background: var(--orange);
-  min-height: 100svh;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 80px 24px 60px;
-  text-align: center;
-  position: relative; overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 80% 20%, rgba(250,193,50,0.25) 0%, transparent 60%),
-              radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 50%);
-  pointer-events: none;
-}
-.hero-logo {
-  animation: up 0.7s ease both;
-}
-.hero-logo img {
-  height: clamp(64px, 18vw, 128px);
-  width: auto;
-  filter: brightness(0) invert(1);
-}
-.hero-tagline {
-  font-size: clamp(15px, 4vw, 20px);
-  color: rgba(255,255,255,0.92);
-  font-weight: 300;
-  letter-spacing: 0.08em;
-  margin-top: 16px;
-  animation: up 0.7s 0.1s ease both;
-}
-.hero-questions {
-  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
-  margin-top: 20px;
-  animation: up 0.7s 0.2s ease both;
-}
-.hero-questions span {
-  background: rgba(255,255,255,0.18);
-  color: white;
-  font-size: 13px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  backdrop-filter: blur(4px);
-}
-.hero-cta {
-  margin-top: 40px;
-  display: inline-flex; align-items: center; gap: 10px;
-  background: var(--white); color: var(--orange);
-  font-size: 15px; font-weight: 700;
-  padding: 16px 32px; border-radius: 50px;
-  text-decoration: none;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-  transition: transform 0.2s, box-shadow 0.2s;
-  animation: up 0.7s 0.3s ease both;
-}
-.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
-.hero-note {
-  margin-top: 12px;
-  font-size: 12px; color: rgba(255,255,255,0.55);
-  animation: up 0.7s 0.4s ease both;
-}
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.82);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.brand{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.04em;color:var(--ink)}
+.brand b{color:var(--orange)}
+.nav a.store{font-size:13px;font-weight:700;color:var(--orange);text-decoration:none}
 
-/* SECTIONS */
-section { padding: 80px 24px; }
-.container { max-width: 680px; margin: 0 auto; }
-.label {
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--orange); margin-bottom: 10px;
-}
-h2 { font-size: clamp(22px, 6vw, 34px); font-weight: 700; line-height: 1.4; margin-bottom: 12px; }
-.desc { font-size: 15px; color: var(--gray); line-height: 1.85; }
+/* hero */
+.hero{padding:96px 0 80px;text-align:center}
+.hero .logo{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,14vw,92px);line-height:1;letter-spacing:.02em}
+.hero .logo .sun{color:var(--orange)}
+.hero h1{font-size:clamp(22px,5.4vw,30px);font-weight:700;line-height:1.5;margin-top:22px;letter-spacing:-.01em}
+.hero h1 .hl{color:var(--orange)}
+.hero p.sub{font-size:15px;color:var(--sub);margin-top:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:24px}
+.chip{font-size:13px;color:var(--ink);background:var(--bg);border:1px solid var(--line);padding:7px 15px;border-radius:999px}
+.store-btn{display:inline-flex;align-items:center;gap:9px;margin-top:36px;background:var(--ink);color:#fff;font-size:15px;font-weight:700;padding:15px 30px;border-radius:999px;text-decoration:none;transition:transform .15s ease,opacity .15s ease}
+.store-btn:hover{transform:translateY(-1px);opacity:.92}
+.store-btn svg{width:18px;height:18px}
+.hero .free-note{margin-top:14px;font-size:12px;color:var(--hint)}
 
-/* FREE */
-.free { background: var(--bg); }
-.free-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 12px; margin-top: 36px;
-}
-.free-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px 16px;
-  text-align: center;
-}
-.free-card .icon { font-size: 28px; margin-bottom: 10px; }
-.free-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
-.free-card p { font-size: 11px; color: var(--gray); line-height: 1.5; }
+/* generic cards */
+.grid{display:grid;gap:12px;margin-top:40px}
+.g4{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px 18px}
+.card .ic{width:26px;height:26px;color:var(--orange);margin-bottom:12px}
+.card h4{font-size:14px;font-weight:700}
+.card p{font-size:12.5px;color:var(--sub);margin-top:5px;line-height:1.6}
+.tinted{background:var(--bg)}
 
-/* AI LEARNING */
-.ai { background: var(--white); }
-.steps { display: flex; flex-direction: column; gap: 0; margin-top: 36px; position: relative; }
-.steps::before {
-  content: ''; position: absolute;
-  left: 19px; top: 20px; bottom: 20px;
-  width: 2px; background: var(--border);
-}
-.step { display: flex; gap: 16px; padding: 14px 0; position: relative; z-index: 1; }
-.step-num {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--orange); color: white;
-  font-size: 14px; font-weight: 700;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.step-body { padding-top: 8px; }
-.step-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-.step-body p { font-size: 13px; color: var(--gray); line-height: 1.6; }
+/* steps */
+.steps{margin-top:40px;position:relative}
+.steps::before{content:'';position:absolute;left:17px;top:18px;bottom:18px;width:2px;background:var(--line)}
+.step{display:flex;gap:16px;padding:13px 0;position:relative}
+.step .n{width:36px;height:36px;border-radius:50%;background:var(--orange);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step h4{font-size:14px;font-weight:700}
+.step p{font-size:13px;color:var(--sub);margin-top:3px}
 
-/* PACKS */
-.packs { background: var(--bg); }
-.pack-list { display: flex; flex-direction: column; gap: 10px; margin-top: 36px; }
-.pack-item {
-  display: flex; align-items: flex-start; gap: 14px;
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 10px; padding: 18px;
-}
-.pack-color { width: 10px; height: 10px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
-.pack-body { flex: 1; }
-.pack-body h3 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
-.pack-body p { font-size: 12px; color: var(--gray); line-height: 1.5; }
-.pack-price { font-size: 12px; font-weight: 700; color: var(--orange); white-space: nowrap; padding-top: 2px; }
-.pack-all {
-  background: var(--orange);
-  border-radius: 10px; padding: 24px;
-  text-align: center; color: white; margin-top: 12px;
-}
-.pack-all h3 { font-size: 16px; font-weight: 700; }
-.pack-all .big { font-size: 28px; font-weight: 700; margin: 10px 0 4px; }
-.pack-all .save {
-  display: inline-block;
-  font-size: 11px;
-  background: rgba(255,255,255,0.22);
-  padding: 3px 12px; border-radius: 20px; margin-top: 4px;
-}
+/* premium */
+.premium{background:var(--bg)}
+.plan{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:28px 24px;margin-top:40px}
+.plan .ttl{font-size:13px;font-weight:700;letter-spacing:.04em;color:var(--orange)}
+.plan .price{display:flex;align-items:baseline;gap:10px;margin-top:10px;flex-wrap:wrap}
+.plan .yen{font-size:38px;font-weight:700;letter-spacing:-.02em}
+.plan .per{font-size:14px;color:var(--sub)}
+.plan .year{font-size:13px;color:var(--sub);margin-top:4px}
+.plan .badge{display:inline-block;font-size:11px;font-weight:700;color:var(--orange);background:#FFF3EA;padding:3px 11px;border-radius:999px;margin-top:12px}
+.feat{margin-top:22px;border-top:1px solid var(--line);padding-top:20px;display:grid;gap:14px}
+.feat li{list-style:none;display:flex;gap:12px;align-items:flex-start}
+.feat .dot{width:18px;height:18px;flex-shrink:0;margin-top:2px;color:var(--orange)}
+.feat b{font-size:14px;font-weight:700;display:block}
+.feat span{font-size:12.5px;color:var(--sub)}
 
-/* PRIVACY */
-.privacy { background: var(--dark); }
-.privacy .label { color: var(--orange); }
-.privacy h2 { color: var(--white); }
-.privacy .desc { color: rgba(255,255,255,0.55); }
-.privacy-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 12px; margin-top: 36px;
-}
-.priv-item {
-  background: rgba(255,255,255,0.05);
-  border-radius: 10px; padding: 18px;
-}
-.priv-badge {
-  display: inline-block;
-  font-size: 10px; font-weight: 700;
-  padding: 2px 10px; border-radius: 20px;
-  margin-bottom: 10px;
-}
-.ok { background: rgba(155,191,61,0.2); color: #9CBF3D; }
-.ng { background: rgba(226,106,116,0.2); color: #E26A74; }
-.priv-item h4 { font-size: 13px; font-weight: 700; color: white; margin-bottom: 4px; }
-.priv-item p { font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+/* privacy */
+.privacy{background:var(--ink);color:#fff}
+.privacy h2{color:#fff}
+.privacy .eyebrow{color:var(--orange)}
+.privacy .lead{color:rgba(255,255,255,.5)}
+.privacy .grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.pcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px}
+.pbadge{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:999px;margin-bottom:10px}
+.pbadge.ok{background:rgba(155,191,61,.18);color:var(--green)}
+.pbadge.no{background:rgba(226,106,116,.18);color:var(--pink)}
+.pcard h4{font-size:13px;font-weight:700}
+.pcard p{font-size:12px;color:rgba(255,255,255,.46);margin-top:5px;line-height:1.6}
 
-/* CTA */
-.cta { background: var(--bg); text-align: center; }
-.cta h2 { margin-bottom: 10px; }
-.cta .desc { margin-bottom: 32px; }
-.btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--orange); color: white;
-  font-size: 15px; font-weight: 700;
-  padding: 16px 36px; border-radius: 50px;
-  text-decoration: none;
-  box-shadow: 0 6px 24px rgba(244,126,56,0.35);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.btn:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(244,126,56,0.45); }
+/* final cta */
+.final{text-align:center}
+.final h2{margin-bottom:12px}
 
-/* FOOTER */
-footer {
-  background: var(--dark);
-  color: rgba(255,255,255,0.35);
-  text-align: center;
-  padding: 36px 24px;
-  font-size: 12px; line-height: 2.2;
-}
-footer a { color: rgba(255,255,255,0.45); text-decoration: none; margin: 0 10px; }
-footer a:hover { color: white; }
-
-@keyframes up {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@media (max-width: 480px) {
-  section { padding: 64px 20px; }
-}
+/* footer */
+footer{background:var(--ink);color:rgba(255,255,255,.4);text-align:center;padding:40px 24px;font-size:12px}
+footer .links a{color:rgba(255,255,255,.55);text-decoration:none;margin:0 9px;line-height:2.4;white-space:nowrap}
+footer .links a:hover{color:#fff}
+footer .cp{margin-top:10px;color:rgba(255,255,255,.3)}
+@media(max-width:480px){section{padding:64px 0}.wrap{padding:0 20px}}
 </style>
 </head>
 <body>
 
-<section class="hero">
-  <div class="hero-logo"><img src="assets/logo.png" alt="KEFUGOTO"></div>
-  <div class="hero-tagline">毎日をラクにするAIアシスタント</div>
-  <div class="hero-questions">
-    <span>今日何食べる？</span>
-    <span>今日何着る？</span>
-    <span>今月使いすぎ？</span>
+<nav class="nav">
+  <div class="wrap">
+    <span class="brand">KEFUGOT<b>O</b></span>
+    <a class="store" href="https://apps.apple.com/app/id6761829463">App Store →</a>
   </div>
-  <a href="#" class="hero-cta" onclick="alert('現在審査中です。公開までしばらくお待ちください。'); return false;">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-    App Storeでダウンロード（無料）
-  </a>
-  <div class="hero-note">まずは無料プランから。パックはあとから選べます。</div>
-</section>
+</nav>
 
-<section class="free">
-  <div class="container">
-    <div class="label">Free</div>
+<header class="hero">
+  <div class="wrap">
+    <div class="logo">KEFUGOT<span class="sun">O</span></div>
+    <h1>朝、開けば<span class="hl">今日が決まる。</span></h1>
+    <p class="sub">服・ごはん・持ち物・出発時刻まで、毎日の小さな決断をAIが肩代わり。</p>
+    <div class="chips">
+      <span class="chip">今日何着る？</span>
+      <span class="chip">今日何食べる？</span>
+      <span class="chip">何時に出る？</span>
+      <span class="chip">今月使いすぎ？</span>
+    </div>
+    <a class="store-btn" href="https://apps.apple.com/app/id6761829463">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      App Store でダウンロード
+    </a>
+    <div class="free-note">無料で使えます。プレミアムは月額¥980から。</div>
+  </div>
+</header>
+
+<section class="tinted">
+  <div class="wrap">
+    <div class="eyebrow">Free</div>
     <h2>無料でできること</h2>
-    <p class="desc">登録するだけで、毎朝4つの情報が届きます。</p>
-    <div class="free-grid">
-      <div class="free-card">
-        <div class="icon">☀️</div>
+    <p class="lead">登録するだけで、毎朝の基本が揃います。</p>
+    <div class="grid g4">
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
         <h4>今日の天気</h4>
-        <p>最高/最低気温・降水確率</p>
+        <p>地域名・気温・降水確率をひと目で。</p>
       </div>
-      <div class="free-card">
-        <div class="icon">📅</div>
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
         <h4>カレンダー予定</h4>
-        <p>今日の予定をまとめて確認</p>
+        <p>今日の予定をまとめて確認。</p>
       </div>
-      <div class="free-card">
-        <div class="icon">🗑</div>
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></svg>
         <h4>ゴミの日</h4>
-        <p>地域に合わせてカスタマイズ可</p>
+        <p>地域に合わせて通知でお知らせ。</p>
       </div>
-      <div class="free-card">
-        <div class="icon">🤖</div>
-        <h4>AI一言提案</h4>
-        <p>天気×予定で今日のヒントを</p>
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8z"/><path d="M19 14l.9 2.1L22 17l-2.1.9L19 20l-.9-2.1L16 17l2.1-.9z"/></svg>
+        <h4>AIの一言</h4>
+        <p>天気×予定で今日のヒントを。</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="ai">
-  <div class="container">
-    <div class="label">Personalize</div>
-    <h2>使うほど、あなた好みになる</h2>
-    <p class="desc">フィードバックを蓄積して、AIが学習します。</p>
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Personalize</div>
+    <h2>使うほど、あなた好みに</h2>
+    <p class="lead">👍👎のフィードバックをAIが学習。記録した服やごはんは写真で呼び出せます。</p>
     <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-body">
-          <h4>提案を受け取る</h4>
-          <p>毎朝、天気・予定をもとにAIが提案を生成</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-body">
-          <h4>👍👎 で評価する</h4>
-          <p>ワンタップで「好き/苦手」をフィードバック</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-body">
-          <h4>AIが好みを覚える</h4>
-          <p>フィードバック1回から提案に反映</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-body">
-          <h4>どんどん賢くなる</h4>
-          <p>使えば使うほど、あなただけの提案へ</p>
-        </div>
-      </div>
+      <div class="step"><div class="n">1</div><div><h4>提案を受け取る</h4><p>毎朝、天気・予定・好みからAIが今日のプランを生成。</p></div></div>
+      <div class="step"><div class="n">2</div><div><h4>ワンタップで評価</h4><p>「好き／苦手」を👍👎で伝えるだけ。</p></div></div>
+      <div class="step"><div class="n">3</div><div><h4>AIが好みを覚える</h4><p>提案する服はローテーション。記録した実物写真も表示。</p></div></div>
+      <div class="step"><div class="n">4</div><div><h4>どんどん自分仕様に</h4><p>使うほど、あなただけのアシスタントへ。</p></div></div>
     </div>
   </div>
 </section>
 
-<section class="packs">
-  <div class="container">
-    <div class="label">Packs</div>
-    <h2>今日の悩みに合ったパックを</h2>
-    <p class="desc">必要なパックだけ選べます。全部入りがいちばんお得。</p>
-    <div class="pack-list">
-      <div class="pack-item">
-        <div class="pack-color" style="background:#F47E38"></div>
-        <div class="pack-body">
-          <h3>ごはんパック</h3>
-          <p>今日の献立提案、食事記録、食事写真AI解析。</p>
-        </div>
-        <div class="pack-price">¥180/月</div>
-      </div>
-      <div class="pack-item">
-        <div class="pack-color" style="background:#9CBF3D"></div>
-        <div class="pack-body">
-          <h3>ファッションパック</h3>
-          <p>天気×予定のコーデ提案。服写真でクローゼット管理。</p>
-        </div>
-        <div class="pack-price">¥180/月</div>
-      </div>
-      <div class="pack-item">
-        <div class="pack-color" style="background:#FAC132"></div>
-        <div class="pack-body">
-          <h3>お金パック</h3>
-          <p>残り予算、サブスク管理、貯金ゴール設定、レシートOCR対応。</p>
-        </div>
-        <div class="pack-price">¥180/月</div>
-      </div>
-      <div class="pack-item">
-        <div class="pack-color" style="background:#40A1CC"></div>
-        <div class="pack-body">
-          <h3>健康パック</h3>
-          <p>睡眠・歩数・体重をHealthKitから自動取得。生理周期はデバイス内のみ管理。</p>
-        </div>
-        <div class="pack-price">¥180/月</div>
-      </div>
-      <div class="pack-item">
-        <div class="pack-color" style="background:#E26A74"></div>
-        <div class="pack-body">
-          <h3>おたのしみパック</h3>
-          <p>今日の運勢・何の日・話題のニュース・エンタメ情報。</p>
-        </div>
-        <div class="pack-price">¥180/月</div>
-      </div>
-    </div>
-    <div class="pack-all">
-      <h3>全部入り</h3>
-      <div class="big">¥500<span style="font-size:16px;font-weight:400">/月</span></div>
-      <div style="font-size:13px;opacity:.8">または ¥4,800/年（月換算¥400）</div>
-      <div class="save">月額なら44%オフ、年額なら56%オフ</div>
+<section class="premium">
+  <div class="wrap">
+    <div class="eyebrow">Premium</div>
+    <h2>全機能を、ひとつのプランで</h2>
+    <p class="lead">パックを選ぶ必要はありません。プレミアムひとつで、すべて使えます。</p>
+    <div class="plan">
+      <div class="ttl">KEFUGOTO プレミアム</div>
+      <div class="price"><span class="yen">¥980</span><span class="per">／月</span></div>
+      <div class="year">年額 ¥7,800（月あたり約¥650）・いつでも解約OK</div>
+      <div class="badge">年額なら約34%お得</div>
+      <ul class="feat">
+        <li><svg class="dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>AIのコーデ・献立提案</b><span>天気と予定に合わせて。記録した服・ごはんは実物写真で呼び出し。</span></div></li>
+        <li><svg class="dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>家計管理</b><span>レシートをAIが読み取り。残り予算・サブスクも管理。</span></div></li>
+        <li><svg class="dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>健康管理</b><span>歩数・睡眠・体重をAppleヘルスケアから自動取得。</span></div></li>
+        <li><svg class="dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>ニュース＆雑学</b><span>今日のニュースをパーソナライズ。見出しから記事へ。</span></div></li>
+        <li><svg class="dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><div><b>話し方を選べる</b><span>ともだち・ていねい・関西弁・執事 ほか8種類から。</span></div></li>
+      </ul>
     </div>
   </div>
 </section>
 
 <section class="privacy">
-  <div class="container">
-    <div class="label">Privacy</div>
+  <div class="wrap">
+    <div class="eyebrow">Privacy</div>
     <h2>センシティブな情報は、外に出さない</h2>
-    <p class="desc">AIに渡す情報はすべて設計でコントロールしています。</p>
-    <div class="privacy-grid">
-      <div class="priv-item">
-        <span class="priv-badge ok">送信OK</span>
-        <h4>天気・位置情報</h4>
-        <p>「晴れ・25度」レベルのみ。具体的な住所は送りません。</p>
-      </div>
-      <div class="priv-item">
-        <span class="priv-badge ok">送信OK（確認あり）</span>
-        <h4>食事写真・服写真</h4>
-        <p>送信前に必ず確認ダイアログを表示。</p>
-      </div>
-      <div class="priv-item">
-        <span class="priv-badge ng">送信しない</span>
-        <h4>生理周期データ</h4>
-        <p>デバイスの中だけで処理。絶対に外部に送信しません。</p>
-      </div>
-      <div class="priv-item">
-        <span class="priv-badge ng">送信しない</span>
-        <h4>名前・メールアドレス</h4>
-        <p>AIプロンプトから完全除外。個人を特定できる情報は渡しません。</p>
-      </div>
+    <p class="lead">AIに渡す情報は、すべて設計でコントロールしています。</p>
+    <div class="grid">
+      <div class="pcard"><span class="pbadge ok">送信OK</span><h4>天気・位置情報</h4><p>「晴れ・25度」レベルのみ。具体的な住所は送りません。</p></div>
+      <div class="pcard"><span class="pbadge ok">確認あり</span><h4>食事・服の写真</h4><p>AIに送る前に必ず確認。サムネは安全に保管され、いつでも見返せます。</p></div>
+      <div class="pcard"><span class="pbadge no">送信しない</span><h4>生理周期データ</h4><p>デバイスの中だけで処理。外部には一切送りません。</p></div>
+      <div class="pcard"><span class="pbadge no">送信しない</span><h4>名前・メールアドレス</h4><p>個人を特定できる情報はAIプロンプトから完全除外。</p></div>
     </div>
   </div>
 </section>
 
-<section class="cta">
-  <div class="container">
-    <h2>まず、無料で試してみて</h2>
-    <p class="desc">ダウンロードは無料。<br>パックはあとから好きなものだけ選べます。</p>
-    <a href="#" class="btn" onclick="alert('現在審査中です。公開までしばらくお待ちください。'); return false;">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      App Storeでダウンロード
+<section class="final">
+  <div class="wrap">
+    <h2>まず、無料で試してみて。</h2>
+    <p class="lead">ダウンロードは無料。プレミアムはあとから、いつでも。</p>
+    <a class="store-btn" href="https://apps.apple.com/app/id6761829463" style="margin-top:28px">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      App Store でダウンロード
     </a>
   </div>
 </section>
 
 <footer>
-  <div>
+  <div class="links">
     <a href="https://kefugoto.github.io/lp/terms.html">利用規約</a>
     <a href="https://kefugoto.github.io/lp/privacy.html">プライバシーポリシー</a>
     <a href="https://kefugoto.github.io/lp/tokushoho.html">特定商取引法に基づく表記</a>
     <a href="https://kefugoto.github.io/lp/contact.html">お問い合わせ</a>
   </div>
-  <div style="margin-top:8px">© 2026 KEFUGOTO. All rights reserved.</div>
+  <div class="cp">© 2026 KEFUGOTO. All rights reserved.</div>
 </footer>
 
 </body>
