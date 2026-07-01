@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>アカウント削除のご案内 — KEFUGOTO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --orange: #F47E38;
+  --dark: #1A1A1A;
+  --gray: #888;
+  --bg: #F5F5F5;
+  --white: #fff;
+  --border: #EEEEEE;
+}
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--dark);
+  background: var(--bg);
+  line-height: 1.8;
+  font-size: 15px;
+  font-weight: 400;
+}
+header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+header a {
+  font-size: 13px;
+  color: var(--orange);
+  text-decoration: none;
+}
+header .logo {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.content {
+  max-width: 680px;
+  margin: 40px auto 80px;
+  padding: 0 24px;
+}
+.card {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 40px;
+  border: 1px solid var(--border);
+}
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.updated {
+  font-size: 12px;
+  color: var(--gray);
+  margin-bottom: 32px;
+}
+h2 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 32px 0 10px;
+  padding-left: 12px;
+  border-left: 3px solid var(--orange);
+}
+p { margin-bottom: 12px; color: #333; }
+ul, ol { padding-left: 20px; margin-bottom: 12px; }
+ul li, ol li { margin-bottom: 6px; color: #333; }
+.highlight {
+  background: #FFF3EB;
+  border: 1px solid #FAD4B8;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 14px;
+  color: var(--dark);
+}
+.highlight strong { color: var(--orange); }
+.contact-box {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+  border: 1px solid var(--border);
+}
+.contact-box a {
+  color: var(--orange);
+  text-decoration: none;
+  font-weight: 500;
+  word-break: break-all;
+}
+.contact-box a:hover { text-decoration: underline; }
+footer {
+  text-align: center;
+  padding: 32px 24px;
+  font-size: 12px;
+  color: var(--gray);
+}
+@media (max-width: 480px) {
+  .card { padding: 24px 20px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/">← トップへ戻る</a>
+  <span style="color:#ccc">|</span>
+  <span class="logo">KEFUGOTO</span>
+</header>
+
+<div class="content">
+  <div class="card">
+    <h1>アカウント削除のご案内</h1>
+    <div class="updated">最終更新日：2026年7月1日</div>
+
+    <p>KEFUGOTO（以下「本アプリ」）のアカウントおよび関連データの削除方法についてご案内します。</p>
+
+    <div class="highlight">
+      <strong>ご案内：</strong> アプリ内から削除いただく方法が最も確実かつ迅速です。アプリを削除済みの場合、または追加のご相談がある場合は、お問い合わせフォームよりご連絡ください。
+    </div>
+
+    <h2>方法1：アプリ内から削除する（推奨）</h2>
+    <ol>
+      <li>KEFUGOTOアプリを起動</li>
+      <li>画面右下の「設定」タブを開く</li>
+      <li>「アカウント」セクションの「アカウント削除」をタップ</li>
+      <li>注意事項を確認し、「削除する」を選択</li>
+      <li>削除が完了するとアプリからログアウトされます</li>
+    </ol>
+
+    <h2>方法2：お問い合わせフォームから削除を依頼する</h2>
+    <p>アプリを削除済み、またはアプリ内からの操作が難しい場合は、以下のフォームからご連絡ください。</p>
+
+    <div class="contact-box">
+      <a href="contact.html" style="display:inline-block; background:var(--orange); color:#fff; padding:12px 24px; border-radius:8px; font-weight:500;">お問い合わせフォームを開く</a>
+      <p style="margin-top:12px; font-size:13px; color:var(--gray);">
+        件名欄に「<strong>アカウント削除のご依頼</strong>」とご記入のうえ、<br>
+        本文にご登録メールアドレスと削除希望である旨をお書きください。
+      </p>
+    </div>
+
+    <p>ご依頼を確認後、営業日3日以内に削除処理を開始し、原則として14日以内に完了いたします。処理完了時にご登録メールアドレスへ通知します。</p>
+
+    <h2>削除されるデータ</h2>
+    <p>アカウント削除により、以下の情報が本アプリのサーバー（Supabase・AWS東京リージョン）から削除されます。</p>
+    <ul>
+      <li>アカウント情報（メールアドレス、認証情報）</li>
+      <li>プロフィール（お名前、生年月日、性別、AIアバター設定）</li>
+      <li>写真AI記録の履歴（食事・服・レシートの記録）</li>
+      <li>健康記録（歩数・睡眠・体重の手動入力データ）</li>
+      <li>コーデ記録（wardrobe）</li>
+      <li>支出記録</li>
+      <li>AI提案の履歴</li>
+      <li>その他、本アプリの利用に伴い蓄積された全データ</li>
+    </ul>
+
+    <h2>保持されるデータ（法令に基づく最小限）</h2>
+    <p>以下の情報は、関連法令（消費税法・電子帳簿保存法など）に基づき、必要期間内に限り保持します。個人を特定できない形で保持または匿名化されます。</p>
+    <ul>
+      <li>購入・返金の取引記録（Google Play / App Store 経由の課金履歴）</li>
+      <li>不正利用防止のための最小限のログ（IPアドレスの匿名化ハッシュ等）</li>
+    </ul>
+
+    <h2>削除後の注意点</h2>
+    <ul>
+      <li>削除後のデータ復元はできません</li>
+      <li>有効な定期購入（サブスクリプション）がある場合は、事前にストア（Google Play / App Store）側で解約手続きを行ってください。アカウント削除では自動解約されません</li>
+      <li>Apple HealthKitや端末内のデータ（AsyncStorage等）はアプリのアンインストールで削除されます</li>
+    </ul>
+
+    <h2>お問い合わせ</h2>
+    <p>アカウント削除に関するご質問・ご相談は、お問い合わせフォームよりご連絡ください。</p>
+    <div class="contact-box">
+      <a href="contact.html" style="display:inline-block; background:var(--orange); color:#fff; padding:12px 24px; border-radius:8px; font-weight:500;">お問い合わせフォームを開く</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <a href="https://kefugoto.github.io/lp/" style="color:var(--orange);text-decoration:none">KEFUGOTO</a>
+  &nbsp;|&nbsp;
+  <a href="terms.html" style="color:var(--gray);text-decoration:none">利用規約</a>
+  &nbsp;|&nbsp;
+  <a href="privacy.html" style="color:var(--gray);text-decoration:none">プライバシーポリシー</a>
+  &nbsp;|&nbsp;
+  <a href="tokushoho.html" style="color:var(--gray);text-decoration:none">特定商取引法に基づく表記</a>
+  &nbsp;|&nbsp;
+  <a href="https://kefugoto.github.io/lp/contact.html" style="color:var(--gray);text-decoration:none">お問い合わせ</a>
+  <br>
+  © 2026 KEFUGOTO. All rights reserved.
+</footer>
+
+</body>
+</html>
